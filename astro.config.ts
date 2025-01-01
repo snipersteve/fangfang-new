@@ -16,10 +16,10 @@ export default defineConfig({
     mdx(),
     sitemap(),
     spectre({
-      name: 'Spectre',
+      name: '芳芳',
       openGraph: {
         home: {
-          title: 'Spectre',
+          title: '芳芳',
           description: 'A minimalistic theme for Astro.'
         },
         blog: {

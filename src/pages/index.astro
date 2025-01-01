@@ -12,13 +12,11 @@ import { getEntry } from 'astro:content';
 import { render } from 'astro:content';
 import { name, openGraph } from 'spectre:globals';
 
-const [posts, projects, about, workExperience, quickInfo, socials] = await Promise.all([
+const [posts, projects, about, quickInfo] = await Promise.all([
 	getCollection('posts', (post) => post.data.draft !== true),
 	getCollection('projects'),
 	getEntry('other', 'about'),
-	getCollection('workExperience'),
-	getCollection('quickInfo'),
-	getCollection('socials')
+	getCollection('quickInfo')
 ]);
 
 // biome-ignore lint/style/noNonNullAssertion: Should always be defined.
@@ -39,19 +37,6 @@ const { Content: About } = await render(about!);
 					<li>
 						<Icon name={info.data.icon} width={24} height={24} class='glow-icon' />
 						<span>{info.data.text}</span>
-					</li>
-				))}
-			</ul>
-		</Card>
-		<Card>
-			<h3 class="no-mt">Socials</h3>
-			<ul class="overview-list">
-				{socials.map((item) => (
-					<li>
-						<a href={item.data.link} class="socials-link">
-							<Icon name={item.data.icon} width={24} height={24} class='glow-icon' />
-							<span>{item.data.text}</span>
-						</a>
 					</li>
 				))}
 			</ul>
@@ -84,37 +69,5 @@ const { Content: About } = await render(about!);
 				))}
 			</div>
 		</Card>
-		<Card>
-			<div class="header-container">
-				<Icon name="folder-git" width={24} height={24} class='glow-icon' />
-				<h2>Latest Projects</h2>
-			</div>
-			<div class="content-container">
-				{projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime()).slice(0, 2).map((project) => (
-					<a href={`/projects/${project.id}`} class="post-container">
-						<div class="post-header">
-							<h3>{project.data.title}</h3>
-							<span class="post-date">{project.data.date.toLocaleDateString()}</span>
-						</div>
-						<span>{project.data.description}</span>
-					</a>
-				))}
-			</div>
-		</Card>
-		<Card>
-			<div class="header-container">
-				<Icon name="briefcase-business" width={24} height={24} class='glow-icon' />
-				<h2>Work Experience</h2>
-			</div>
-			<div class="work-experience-container">
-				{workExperience.reverse().map((entry) => (
-					<div class="work-experience-entry">
-						<span class="work-experience-duration">{entry.data.duration}</span>
-						<h3 class="work-experience-company">{entry.data.company}</h3>
-						<span class="work-experience-role">{entry.data.title}</span>
-						<p class="work-experience-desc">{entry.data.description}</p>
-					</div>
-				))}
-			</div>
 	</div>
 </Layout>
