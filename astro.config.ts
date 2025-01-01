@@ -16,18 +16,18 @@ export default defineConfig({
     mdx(),
     sitemap(),
     spectre({
-      name: '芳芳',
+      name: "Fangfang",
       openGraph: {
         home: {
-          title: '芳芳',
-          description: 'A minimalistic theme for Astro.'
+          title: "Fangfang",
+          description: "Personal Website"
         },
         blog: {
-          title: 'Blog',
-          description: 'News and guides for Spectre.'
+          title: "Blog",
+          description: "Personal Blog"
         },
         projects: {
-          title: 'Projects'
+          title: "Projects"
         }
       },
       giscus: {
